@@ -1,8 +1,10 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-//api de prods
-const ProductMethods = require("../api/productosClass");
+const Daos = require('../src/daos/configDb');
+
+
+const ProductMethods = Daos.productos;
 
 //Función de administrador
 function admin (req, res, next){
@@ -23,6 +25,8 @@ router.get('/', async (req, res) => {
     const prods = await ProductMethods.getAll();
     res.json(prods)
 })
+
+
 //Devuelve un producto según su id
 router.get('/:id?', async (req,res)=>{
     const { id } = req.params;

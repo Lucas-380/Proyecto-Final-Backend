@@ -1,19 +1,19 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const config = require('./src/config')
 
+const app = express();
+const PORT = process.env.DB
+
+app.use(express.static(__dirname + '/public'));
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-
-//-------------------------ROUTERS-------------------------
-const routerProds = require ('./routes/productosRoute');
+//Routes
+const routerProds = require ('./routes/productos');
 app.use('/api/productos', routerProds);
 
-const routerCarrito = require ('./routes/carritoRoute');
+const routerCarrito = require ('./routes/carrito');
 app.use('/api/carrito', routerCarrito);
-
-//--vista--index.html--
-app.use('/', express.static('public'));
 
 //errores
 app.use((err, req, res, next) => { 
@@ -21,8 +21,8 @@ app.use((err, req, res, next) => {
     return res.status(500).send('Error del servidor...')
 })
 
-const PORT = process.env.PORT || 8080
-
-app.listen(PORT, () =>{
-    console.log(`Example app listening at http:/localhost:${PORT}`)
-});
+// PORT = process.env.PORT || 8080
+const server = app.listen(PORT, () =>{
+    console.log(`Example app listening at ${server.address().port}`)
+})
+server.on('error', error => console.log(`Error al conectar el servidor ${error}`));

@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Globo Terráqueo",
+    "description": "prueba n1",
+    "codigo": 1,
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png",
+    "price": 345.67,
+    "stock": 123,
+    "id": 1
+  },
+  {
+    "title": "coca cola",
+    "description": "prueba n1",
+    "codigo": 2,
+    "thumbnail": "confinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png",
+    "price": 250,
+    "stock": 1,
+    "id": "2"
+  },
+  {
+    "title": "pancho",
+    "description": "prueba n1",
+    "codigo": 3,
+    "thumbnail": "confinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png",
+    "price": 250,
+    "stock": 1,
+    "id": "3"
+  }
+]
