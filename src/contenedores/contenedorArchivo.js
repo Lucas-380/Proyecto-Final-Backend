@@ -30,17 +30,17 @@ class ContenedorArchivo {
             if (data === '[]'){
                 prod.id = newID
                 newProd = [prod];
-                await this.write(newProd, 'Primer productos agregado');
+                await this.write(newProd, 'Primera data guardada');
             }else{
                 prod.id = parseInt(datos[datos.length - 1].id) + 1;
                 prod.id = `${prod.id}`
                 newProd = prod;
                 datos.push(newProd);
-                await this.write(datos, 'Producto agregado')
+                await this.write(datos, 'Data agregada')
             }
             return newProd
         } catch (err) {
-            throw Error(`Error al guardar el producto ${err}`)
+            throw Error(`Error al guardar la data ${err}`)
         }
     }
     async getAll() {
@@ -67,7 +67,7 @@ class ContenedorArchivo {
     async deleteAll() {
         try {
             let data = []
-            await this.write(data, 'Productos eliminados')
+            await this.write(data, 'Archivos eliminados')
         } catch (err) {
             throw Error(`Error ${err}`);
         }
@@ -79,23 +79,26 @@ class ContenedorArchivo {
             let prod = datos.find(p=>p.id == id);
             if(prod) {
                 let i = datos.indexOf(prod);
-                datos.splice(index, 1);
-                await this.write(datos, `El producto con el id ${id} fue eliminado`)
+                datos.splice(i, 1);
+                await this.write(datos, `El archivo con el id ${id} fue eliminado`)
+                return datos
             }else{
-                console.log(`El producto con el id ${id} no existe`);
+                console.log(`El archivo con el id ${id} no existe`);
             }
         } catch (err) {
             throw Error(`Error ${err}`);
         }
     }
     async update(prod) {
-        let prodUpdate = await this.getById(prod.id);
-        let allProds = await this.read();
-        if (prodUpdate){
-            const producto = allProds.findIndex(p => p.id == prod.id);
-            Object.assign(allProds[producto], prod);
-            await this.write(allProds, `El producto con el id ${prod.id} fue modificado correctamente`)
-        }else return
+        let prodMod = await this.getById(prod.id);
+        if (Object.keys(prodMod).length != 0) {
+            let prods = await this.read();
+            prods = (JSON.parse(prods, null, 2));
+            let id = prod.id - 1;
+            prods.splice(id, 1, prod);
+            await this.write(prods, "Archivo modificado correctamente");
+            return prods;
+        }
     }
 }
 

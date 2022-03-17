@@ -1,15 +1,8 @@
-// let admin = require("firebase-admin");
-const config = require('../config');
+
 const { v4:uuid4 } = require('uuid')
 
 
 var admin = require("firebase-admin");
-
-var serviceAccount = require(config.firebase);
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
 
 
 const db = admin.firestore()

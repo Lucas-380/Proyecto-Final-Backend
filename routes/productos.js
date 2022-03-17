@@ -19,6 +19,13 @@ function admin (req, res, next){
     }
 }
 
+//timestamp
+function fecha() {
+    const time = new Date();
+    let fecha = time.getDate() + '/' + (time.getMonth()+1) + ' - ' + time.getHours() + ':' + time.getMinutes() + ':' + time.getSeconds();
+    return fecha;
+  }
+
 //-----------------------------------ROUTES-----------------------------------
 //Devuelve todos los productos
 router.get('/', async (req, res) => {
@@ -36,7 +43,17 @@ router.get('/:id?', async (req,res)=>{
 
 //Recibe y agrega un producto, y lo devuelve con su id asignado
 router.post('/', admin, async (req, res)=>{
-    const producto = await ProductMethods.save(req.body)
+    let {title, description, codigo, thumbnail, price, stock} = req.body;
+    let newProd = {
+        timestamp: fecha(),
+        title,
+        description,
+        codigo,
+        thumbnail,
+        price,
+        stock
+    }
+    const producto = await ProductMethods.save(newProd)
     producto
         ? res.json(producto)
         : res.status(404).send('Faltan campos en el producto');
@@ -44,11 +61,25 @@ router.post('/', admin, async (req, res)=>{
 
 //Recibe y actualiza un producto según su id
 router.put('/:id', admin, async (req, res) => {
-    const { id } = req.params;
-    let respuesta = await ProductMethods.update(id, req.body)
-    respuesta
-        ? res.json(respuesta)
-        : res.status(404).send(`No se pudo actualizar producto con el id ${id}`)
+    let { title, description, codigo, thumbnail, price, stock} = req.body;
+    let prodUpdate = {
+        id : req.params.id,
+        timestamp: fecha(),
+        title,
+        description,
+        codigo,
+        thumbnail,
+        price,
+        stock
+    };
+    //validacion de existencia
+    let exists = await ProductMethods.getById(req.params.id);
+    if (Object.keys(exists).length != 0 ) {
+        const prod = await ProductMethods.update(prodUpdate)
+        res.json(prod)
+    } else {
+        res.send({ Error : 'Producto no encontrado' });
+    }
 })
 
 //Elimina un producto según su id

@@ -1,0 +1,17 @@
+[
+  {
+    "timestamp": "17/3 - 12:4:57",
+    "productos": [
+      {
+        "timestamp": "17/3 - 12:38:20",
+        "title": "Bicicleta",
+        "description": "Bicicleta ultimate n50",
+        "codigo": 5,
+        "price": 55000,
+        "stock": 6,
+        "id": 1
+      }
+    ],
+    "id": 1
+  }
+]

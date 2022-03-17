@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const config = require('../config')
 
 const main =()=>{
-    mongoose.connect(config.mongoRemote.cnxStr)
+    mongoose.connect(config.mongoRemote.path)
     mongoose.connection.on('open', () => {
         console.log('Base de datos conectada correctamente');
     })
@@ -44,7 +44,7 @@ class ContenedorMongoDB {
         try {
             let data = await this.collection.find({}, {__v:0}).lean()
             data = data.map(asPOJO);
-            data = data.map(d => renameField(d, '_id', 'id'));
+            data = data.map(d => rename(d, '_id', 'id'));
             return data
         } catch (err) {
             throw Error(`Error ${err}`)
@@ -80,21 +80,21 @@ class ContenedorMongoDB {
             throw Error(`Error ${err}`)
         }
     }
-    async update(data){
+    async update(nuevoElem){
         try {
-            rename(data, 'id', '_id')
-            const {e, eModified} = await this.collection.replaceOne({'_id': data.id}, data)
-            if(e == 0 || eModified == 0){
-                throw new Error('Error al actualizar')
-            }else{
-                rename(data,'id','_id')
-                remove(data,'__v')
-                return asPOJO(data)
+            rename(nuevoElem, 'id', '_id')
+            const { n, nModified } = await this.collection.replaceOne({ '_id': nuevoElem._id }, nuevoElem)
+            if (n == 0 || nModified == 0) {
+                throw new Error('Error al actualizar: no encontrado')
+            } else {
+                rename(nuevoElem, '_id', 'id')
+                remove(nuevoElem, '__v')
+                return asPOJO(nuevoElem)
             }
-        } catch (err) {
-            throw Error(`Error ${err}`)
+        } catch (error) {
+            throw new Error(`Error al actualizar: ${error}`)
         }
     }
 }
 
-module.export = ContenedorMongoDB;
+module.exports = ContenedorMongoDB;

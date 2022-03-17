@@ -1,29 +1,41 @@
 [
   {
-    "title": "Globo Terráqueo",
-    "description": "prueba n1",
-    "codigo": 1,
-    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png",
-    "price": 345.67,
-    "stock": 123,
+    "timestamp": "17/3 - 12:38:20",
+    "title": "Bicicleta",
+    "description": "Bicicleta ultimate n50",
+    "codigo": 5,
+    "price": 55000,
+    "stock": 6,
     "id": 1
   },
   {
-    "title": "coca cola",
-    "description": "prueba n1",
-    "codigo": 2,
-    "thumbnail": "confinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png",
-    "price": 250,
-    "stock": 1,
+    "timestamp": "17/3 - 12:39:36",
+    "title": "Moto",
+    "description": "Moto rt500-8",
+    "codigo": 5,
+    "thumbnail": "www.imagen.com",
+    "price": 285000,
+    "stock": 3,
     "id": "2"
   },
   {
-    "title": "pancho",
-    "description": "prueba n1",
-    "codigo": 3,
-    "thumbnail": "confinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png",
-    "price": 250,
-    "stock": 1,
+    "timestamp": "17/3 - 12:40:18",
+    "title": "Auto",
+    "description": "Auto Ford 213",
+    "codigo": 85,
+    "thumbnail": "www.imagen.com",
+    "price": 650000,
+    "stock": 8,
     "id": "3"
+  },
+  {
+    "timestamp": "17/3 - 13:22:46",
+    "title": "Auto",
+    "description": "Auto Ford 213",
+    "codigo": 85,
+    "thumbnail": "www.imagen.com",
+    "price": 650000,
+    "stock": 8,
+    "id": "4"
   }
 ]

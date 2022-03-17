@@ -1,3 +1,5 @@
+const config = require('../config');
+
 let productosDao
 let carritosDao
 
@@ -11,6 +13,11 @@ switch (contenedor) {
         carritosDao = new CarritosDaoArchivo()
         break
     case 'firebase':
+        var admin = require("firebase-admin");
+
+        admin.initializeApp({
+        credential: admin.credential.cert(config.firebase)
+        });
         const ProductosDaoFirebase = require("./productos/ProductosDaoFirebase")
         const CarritosDaoFirebase = require("./carritos/CarritoDaoFirebase")
         
