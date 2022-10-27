@@ -1,4 +1,4 @@
-# Proyecto Final 2daEntrega - CoderHouse - Backend 👨‍💻
+# Proyecto Final 2daEntrega - Backend 👨‍💻
 _Metodos verificados mediante POSTMAN._
 
 ### Antes de iniciar el sevidor, elegir la base de datos en el archivo .env :
